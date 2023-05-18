@@ -48,16 +48,13 @@ public class Program {
 			// antes de instanciar tem que garantir que as datas estao ok, as novas datas de reserva
 			// nao podem ser do passado
 			// cria uma variavel now contendo a data do dia
-			Date now = new Date();
-			// agora compara com as datas checkIn e checkOut
-			if(checkIn.before(now) || checkOut.before(now)) {
-				System.out.println("Error in Reservation: Reservations dates for update must be future dates");
-			}
-			else if(!checkOut.after(checkIn)) {
-				System.out.println("Error in Reservation: Check-out date must be after check-in date");
+			reservation.updateDates(checkIn, checkOut);
+			// aqui trata o retorno do metodo updateDates, se null ok, senao erros a listar
+			String error = reservation.updateDates(checkIn, checkOut);
+			if (error != null) {
+				System.out.println("Error in reservation: " + error);
 			}
 			else {
-				reservation.updateDates(checkIn, checkOut);
 				System.out.println("Reservation: " + reservation);			
 			}
 

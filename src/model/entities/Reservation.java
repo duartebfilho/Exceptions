@@ -48,9 +48,19 @@ public class Reservation {
 	// agora criar metodo para atualizar datas, apenas vai fazer o checkIn e checkOut do objeto 
 	// receber as datas que vem como argumento
 	
-	public void updateDates(Date checkIn, Date checkOut) {
+	public String updateDates(Date checkIn, Date checkOut) {
+		
+		Date now = new Date();
+		// agora compara com as datas checkIn e checkOut
+		if(checkIn.before(now) || checkOut.before(now)) {
+			return "Error in Reservation: Reservations dates for update must be future dates";
+		}
+		if(!checkOut.after(checkIn)) {
+			return "Error in Reservation: Check-out date must be after check-in date";
+		}
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
+		return null;   // vai ser o critério para tudo certo, sem error acima
 	}
 	
 	// vamos implementar o toString para mensagens de listar 
