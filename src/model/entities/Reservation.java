@@ -4,12 +4,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import model.exceptions.DomainException;
+
 public class Reservation {
 	private int roomNumber;
 	private Date checkIn;
 	private Date checkOut;
 	
-	public Reservation(int roomNumber, Date checkIn, Date checkOut) {
+	public Reservation(int roomNumber, Date checkIn, Date checkOut) throws DomainException {
+		
+		if(!checkOut.after(checkIn)) {
+			throw new DomainException("Error in Reservation: Check-out date must be after check-in date");
+		}
 		this.roomNumber = roomNumber;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
@@ -18,7 +24,6 @@ public class Reservation {
 	public int getRoomNumber() {
 		return roomNumber;
 	}
-
 	public void setRoomNumber(int roomNumber) {
 		this.roomNumber = roomNumber;
 	}
@@ -48,19 +53,18 @@ public class Reservation {
 	// agora criar metodo para atualizar datas, apenas vai fazer o checkIn e checkOut do objeto 
 	// receber as datas que vem como argumento
 	
-	public String updateDates(Date checkIn, Date checkOut) {
+	public void updateDates(Date checkIn, Date checkOut)throws DomainException {
 		
 		Date now = new Date();
 		// agora compara com as datas checkIn e checkOut
 		if(checkIn.before(now) || checkOut.before(now)) {
-			return "Error in Reservation: Reservations dates for update must be future dates";
+			throw new DomainException("Error in Reservation: Reservations dates for update must be future dates");
 		}
 		if(!checkOut.after(checkIn)) {
-			return "Error in Reservation: Check-out date must be after check-in date";
+			throw new DomainException("Error in Reservation: Check-out date must be after check-in date");
 		}
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
-		return null;   // vai ser o critério para tudo certo, sem error acima
 	}
 	
 	// vamos implementar o toString para mensagens de listar 
