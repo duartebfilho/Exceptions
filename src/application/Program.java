@@ -10,8 +10,6 @@ import model.exceptions.DomainException;
 
 public class Program {
 	
-	// versao muito ruim....vai guardar em github
-
 	public static void main(String[] args) {
 	Scanner sc = new Scanner(System.in);
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
