@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>A174ExceptionsVeryBad</name>
+=======
+	<name>Exception1</name>
+>>>>>>> 2eacd7f (Excepton ex.1 v1)
 	<comment></comment>
 	<projects>
 	</projects>
